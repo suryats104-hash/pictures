@@ -37,9 +37,19 @@ jobs:
         working-directory: android
         run: chmod +x ./gradlew
 
+      - name: Raise Gradle JVM heap
+        working-directory: android
+        run: |
+          sed -i '/^org.gradle.jvmargs/d' gradle.properties || true
+          echo "org.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8" >> gradle.properties
+          echo "--- gradle.properties ---"
+          cat gradle.properties
+
       - name: Build debug APK
         working-directory: android
-        run: ./gradlew assembleDebug --no-daemon
+        env:
+          GRADLE_OPTS: "-Xmx6g -Dorg.gradle.daemon=false"
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
