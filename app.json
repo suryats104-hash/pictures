@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "Pictures",
+    "slug": "oralcollect",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "oralcollect",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.dhaant.oralcollect",
+      "adaptiveIcon": {
+        "backgroundColor": "#0058BC"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.dhaant.oralcollect",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Pictures needs camera access to capture intraoral photos.",
+        "NSPhotoLibraryUsageDescription": "Pictures needs photo library access to organise intraoral photos into per-patient albums.",
+        "NSPhotoLibraryAddUsageDescription": "Pictures saves captured intraoral photos to a per-patient album in your Photos library."
+      }
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Pictures needs camera access to capture intraoral photos."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Pictures saves intraoral photos into per-patient Photos albums.",
+          "savePhotosPermission": "Pictures saves intraoral photos into per-patient Photos albums.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ]
+    ]
+  }
+}
